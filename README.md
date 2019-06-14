@@ -2,6 +2,7 @@
 
 ```
 qcan --help
+qcan fire 8.8.8.8 loop www.google.com 20
 ```
 
 ## Windows

@@ -1,0 +1,3 @@
+[console_scripts]
+qcan = src.entry_point:entry_point
+

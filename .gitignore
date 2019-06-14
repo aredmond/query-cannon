@@ -1,0 +1,9 @@
+.vscode/
+env/
+.env/
+__pycache__
+*.p
+nsetool.egg-info/
+local-dev.sh
+__init__.pyc
+*.DS_Store

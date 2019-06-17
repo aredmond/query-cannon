@@ -8,7 +8,7 @@ setuptools.setup(
     version="0.0.1",
     author="Andrew Redmond",
     author_email="andrewpredmond@gmail.com",
-    description="python DNS Tester",
+    description="Python DNS Tester",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://git-codecommit.us-west-2.amazonaws.com/v1/repos/query-cannon",
@@ -18,6 +18,7 @@ setuptools.setup(
         'requests',
         'dnspython',
         'ray',
+        'setproctitle'
     ],
     classifiers=[
         "Programming Language :: Python :: 3",

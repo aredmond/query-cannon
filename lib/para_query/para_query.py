@@ -36,20 +36,22 @@ class paraquery(object):
             answers = self.resolver.query(URL, raise_on_no_answer=False)
             etime = time.perf_counter()
         except dns.resolver.NoNameservers as e:
-            print("No response to dns request", file=sys.stderr, flush=True)
+            # print("No response to dns request", file=sys.stderr, flush=True)
             sys.exit(1)
         except dns.resolver.NXDOMAIN as e:
-            print("Hostname does not exist", file=sys.stderr, flush=True)
+            # print("Hostname does not exist", file=sys.stderr, flush=True)
             sys.exit(1)
         except dns.resolver.Timeout:
-            print("Request timeout", flush=True)
+            # print("Request timeout", flush=True)
+            pass
         except dns.resolver.NoAnswer:
-            print("No answer", flush=True)
+            # print("No answer", flush=True)
+            pass
         else:
             elapsed = answers.response.time * 1000  # convert to milliseconds
-            print(
-                "%d bytes request: %s from %s: time=%.3f ms" % (
-                    len(str(answers.rrset)), URL, self.NS_IP, elapsed), flush=True)
+            # print(
+                # "%d bytes request: %s from %s: time=%.3f ms" % (
+                    # len(str(answers.rrset)), URL, self.NS_IP, elapsed), flush=True)
             # print(answers.rrset, flush=True)
             # print("flags:", dns.flags.to_text(answers.response.flags), flush=True)
 
@@ -67,7 +69,7 @@ class paraquery(object):
     def loop_query(self, URL, loops=5):
         """Make several DNS queries in succession"""
 
-        click.echo(f'Making {loops} query/ies.')
+        # click.echo(f'Making {loops} query/ies.')
         for loop in range(loops):
             result, q_time = self.query(URL)
             # click.echo(f'{result} {q_time}')

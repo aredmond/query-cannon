@@ -16,6 +16,8 @@ setuptools.setup(
     install_requires=[
         'Click',
         'requests',
+        'dnspython',
+        'ray',
     ],
     classifiers=[
         "Programming Language :: Python :: 3",

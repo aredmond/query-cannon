@@ -22,3 +22,13 @@ def print(paraquery_obj):
 def loop(paraquery_obj, url, loops):
     """Call a click echo from a lib"""
     paraquery_obj['paraquery'].loop_query(URL=url, loops=int(loops))
+    
+
+@fire.command('para')
+@click.argument('url')
+@click.argument('loops')
+@click.argument('threads')
+@click.pass_obj
+def loop(paraquery_obj, url, loops, threads):
+    """Call a click echo from a lib"""
+    paraquery_obj['paraquery'].para_query(URL=url, loops=int(loops), branches=int(threads))

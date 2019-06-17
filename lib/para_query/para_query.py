@@ -7,6 +7,7 @@ import dns.flags
 import dns.rdatatype
 import dns.resolver
 import sys
+import ray
 
 class paraquery(object):
     """Parallel DNS queries
@@ -71,7 +72,16 @@ class paraquery(object):
             result, q_time = self.query(URL)
             # click.echo(f'{result} {q_time}')
 
+    def para_query(self, URL, loops=5, branches=2):
+        """Make several DNS queries in succession"""
+        click.echo(f'Making {loops*branches} query/ies. Across {branches} process/es.')
 
+        @ray.remote
+        def call_loop_in_thread(URL, loops):
+            self.loop_query(URL, loops)
+
+        ray.init()
+        results = ray.get([call_loop_in_thread.remote(URL, loops) for i in range(branches) ])  # Execute in parallel
 
     # resolver = dns.resolver.Resolver()
     # resolver.nameservers = [dnsserver]

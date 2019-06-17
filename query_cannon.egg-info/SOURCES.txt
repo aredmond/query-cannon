@@ -1,8 +1,0 @@
-README.md
-setup.py
-query_cannon.egg-info/PKG-INFO
-query_cannon.egg-info/SOURCES.txt
-query_cannon.egg-info/dependency_links.txt
-query_cannon.egg-info/entry_points.txt
-query_cannon.egg-info/requires.txt
-query_cannon.egg-info/top_level.txt

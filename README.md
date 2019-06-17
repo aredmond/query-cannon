@@ -10,7 +10,7 @@ qcan fire 8.8.8.8 loop www.google.com 20
 ```
 qcan fire 8.8.8.8 loop www.google.com 20
 qcan fire 8.8.8.8 para www.google.com 5 2
-qcan fire 10.15.190.71 urlpara urls.txt 5 2
+qcan fire -v 10.15.190.71 urlpara urls.txt 5 2
 ```
 
 ## Mac / Linux

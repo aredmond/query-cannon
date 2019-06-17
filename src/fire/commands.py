@@ -4,11 +4,12 @@ from pprint import pprint
 
 @click.group()
 @click.argument('ns_ip')
+@click.option('--verbose/--no-verbose', '-v', default=False)
 @click.pass_context
-def fire(ctx, ns_ip):
+def fire(ctx, ns_ip, verbose):
     """This is a test command group"""
     # ctx.obj = testclass()
-    ctx.obj['paraquery'] = paraquery(NS_IP=ns_ip)
+    ctx.obj['paraquery'] = paraquery(NS_IP=ns_ip, verbose=verbose)
 
 @fire.command('print')
 @click.pass_obj

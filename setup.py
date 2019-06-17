@@ -18,6 +18,8 @@ setuptools.setup(
         'requests',
         'dnspython',
         'ray',
+        'psutil',
+        'setproctitle',
     ],
     classifiers=[
         "Programming Language :: Python :: 3",

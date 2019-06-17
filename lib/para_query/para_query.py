@@ -8,6 +8,7 @@ import dns.rdatatype
 import dns.resolver
 import sys
 import ray
+import random
 
 class paraquery(object):
     """Parallel DNS queries
@@ -74,6 +75,17 @@ class paraquery(object):
             result, q_time = self.query(URL)
             # click.echo(f'{result} {q_time}')
 
+    def loop_query_with_diff_URLs(self, URL_list, loops=5):
+        """Make several DNS queries in succession"""
+
+        # click.echo(f'Making {loops} query/ies.')
+        for loop in range(loops):
+            # url = random.choice(URL_list)
+            url = 'google.com'
+
+            result, q_time = self.query(url)
+            # click.echo(f'{result} {q_time}')
+
     def para_query(self, URL, loops=5, branches=2):
         """Make several DNS queries in succession"""
         click.echo(f'Making {loops*branches} query/ies. Across {branches} process/es.')
@@ -84,6 +96,18 @@ class paraquery(object):
 
         ray.init()
         results = ray.get([call_loop_in_thread.remote(URL, loops) for i in range(branches) ])  # Execute in parallel
+
+
+    def para_query_with_diff_URLs(self, URL_list, loops=5, branches=2):
+        """Make several DNS queries in succession"""
+        click.echo(f'Making {loops*branches} query/ies. Across {branches} process/es.')
+
+        @ray.remote
+        def call_loop_in_thread(URL_list, loops):
+            self.loop_query_with_diff_URLs(URL_list, loops)
+
+        ray.init()
+        results = ray.get([call_loop_in_thread.remote(URL_list, loops) for i in range(branches) ])  # Execute in parallel
 
     # resolver = dns.resolver.Resolver()
     # resolver.nameservers = [dnsserver]

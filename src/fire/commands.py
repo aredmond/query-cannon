@@ -1,5 +1,6 @@
 import click
 from lib.para_query.para_query import paraquery
+from pprint import pprint
 
 @click.group()
 @click.argument('ns_ip')
@@ -20,7 +21,7 @@ def print(paraquery_obj):
 @click.argument('loops')
 @click.pass_obj
 def loop(paraquery_obj, url, loops):
-    """Call a click echo from a lib"""
+    """Hit a DNS server with one request after another"""
     paraquery_obj['paraquery'].loop_query(URL=url, loops=int(loops))
     
 
@@ -29,6 +30,16 @@ def loop(paraquery_obj, url, loops):
 @click.argument('loops')
 @click.argument('threads')
 @click.pass_obj
-def loop(paraquery_obj, url, loops, threads):
-    """Call a click echo from a lib"""
+def para(paraquery_obj, url, loops, threads):
+    """Run the loop command in parallel"""
     paraquery_obj['paraquery'].para_query(URL=url, loops=int(loops), branches=int(threads))
+
+@fire.command('urlpara')
+@click.argument('url_filename')
+@click.argument('loops')
+@click.argument('threads')
+@click.pass_obj
+def urlpara(paraquery_obj, url_filename,  loops, threads):
+    """Run the parallel command over a file of URLs, quering randomly."""
+    url_list = [line.rstrip('\n') for line in open(url_filename)]
+    paraquery_obj['paraquery'].para_query_with_diff_URLs(url_list, loops=int(loops), branches=int(threads))
